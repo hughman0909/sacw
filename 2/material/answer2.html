@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第2章 ヒント &amp; 解答</title>
+<style>
+:root {
+  --bg:#0d1117; --card:#161b22; --card2:#1c2128; --border:#30363d;
+  --text:#c9d1d9; --muted:#8b949e; --code:#bc8cff;
+  --green:#3fb950; --blue:#58a6ff; --yellow:#e3b341; --red:#f85149;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;padding:2rem 1rem;max-width:780px;margin:0 auto;line-height:1.6}
+h1{font-size:1.5rem;color:var(--green);margin-bottom:.3rem}
+.subtitle{color:var(--muted);font-size:.85rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.problem{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem;margin-bottom:1.4rem}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem}
+h2{font-size:1rem;margin-bottom:.7rem;line-height:1.4}
+.desc{color:var(--muted);font-size:.88rem;margin-bottom:1rem}
+code{background:#2d333b;padding:.1em .35em;border-radius:4px;font-family:'Fira Code',monospace;font-size:.83em;color:var(--code)}
+pre{background:#2d333b;border-radius:6px;padding:.7rem 1rem;font-family:'Fira Code',monospace;font-size:.8rem;color:var(--code);overflow-x:auto;margin:.5rem 0}
+.hints{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+details{border:1px solid var(--border);border-radius:7px;overflow:hidden}
+summary{padding:.55rem 1rem;cursor:pointer;font-size:.85rem;color:var(--yellow);user-select:none;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▶  ';font-size:.7rem}
+details[open] summary::before{content:'▼  '}
+summary:hover{background:rgba(227,179,65,.06)}
+details[open] summary{border-bottom:1px solid var(--border)}
+.hcont{padding:.8rem 1rem;font-size:.87rem;background:var(--card2)}
+.hcont p+p{margin-top:.4rem}
+details.ans summary{color:var(--green)}
+details.ans summary::before{content:'🔓  ';font-size:.85rem}
+details.ans[open] summary::before{content:'🔒  '}
+.acont{padding:.9rem 1rem;background:rgba(63,185,80,.06);font-size:.87rem}
+.acont p+p,.acont ul+p{margin-top:.6rem}
+table{width:100%;border-collapse:collapse;font-size:.84rem;margin:.5rem 0}
+th{background:var(--card2);color:var(--muted);padding:.4rem .7rem;text-align:left;border:1px solid var(--border)}
+td{padding:.4rem .7rem;border:1px solid var(--border)}
+.row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem}
+.lbl{font-size:.83rem;color:var(--muted);min-width:130px}
+input[type=text]{background:#0d1117;border:1px solid var(--border);border-radius:6px;padding:.38rem .75rem;color:var(--text);font-family:'Fira Code',monospace;font-size:.85rem;width:200px}
+input[type=text]:focus{outline:none;border-color:var(--blue)}
+.wide{width:280px}
+.btn{background:#1f6feb;color:#fff;border:none;border-radius:6px;padding:.38rem .9rem;cursor:pointer;font-size:.82rem}
+.btn:hover{background:#388bfd}
+.fb{font-size:.82rem;font-weight:600;min-width:90px}
+.fb.ok{color:var(--green)}.fb.ng{color:var(--red)}
+.ans-wrap{display:none;margin-top:1rem}
+hr{border:none;border-top:1px solid var(--border);margin:.8rem 0}
+.badge{display:inline-block;background:#2d333b;border-radius:4px;padding:.1em .5em;font-family:'Fira Code',monospace;font-size:.8em;color:var(--code);margin:.1rem}
+</style>
+</head>
+<body>
+
+<h1>第2章 — 文字列から痕跡を探そう</h1>
+<p class="subtitle">回答を入力して確認ボタンを押すと、答えを見ることができます。</p>
+
+<!-- 問題3 -->
+<div class="problem">
+  <div class="tag">問題 3</div>
+  <h2>ディレクトリ2のバイナリファイルの中に含まれるWebサイトへのURLを探せ</h2>
+  <p class="desc">ディレクトリ2に含まれるバイナリファイルの中から、あるWebサイトへのURLだと考えられる文字列を探し出してください。</p>
+
+  <div class="hints">
+    <details><summary>ヒント1</summary>
+      <div class="hcont"><p><code>strings</code> コマンドはバイナリの中から印字可能なASCII文字列（4文字以上連続）を抽出します。URLも文字列として埋め込まれていれば取り出せます。</p></div>
+    </details>
+    <details><summary>ヒント2</summary>
+      <div class="hcont"><p>URLは <code>http://</code> や <code>https://</code> で始まります。<code>grep</code> で絞り込みましょう：</p><pre>strings urlbin | grep http</pre></div>
+    </details>
+    <details><summary>ヒント3</summary>
+      <div class="hcont"><p>ディレクトリ内の全ファイルに一括適用：</p><pre>for f in *; do echo "--- $f ---"; strings "$f" | grep -E "https?://"; done</pre></div>
+    </details>
+  </div>
+
+  <div class="row">
+    <span class="lbl">見つけたURL：</span>
+    <input type="text" id="q3" class="wide" placeholder="https://...">
+    <button class="btn" onclick="chk('q3',['https://www.kindai.ac.jp/','https://www.kindai.ac.jp'],'f3','ans3')">確認</button>
+    <span class="fb" id="f3"></span>
+  </div>
+
+  <div class="ans-wrap" id="ans3">
+    <hr>
+    <details class="ans"><summary>答えを見る</summary>
+      <div class="acont">
+        <p><strong>https://www.kindai.ac.jp/</strong></p>
+        <p><code>urlbin</code> に埋め込まれています。</p>
+        <pre>strings urlbin | grep -E "https?://"
+# → https://www.kindai.ac.jp/</pre>
+        <p style="color:var(--muted)">マルウェアでは通信先のC2サーバーURLがハードコードされることがあり、strings 一発で特定できる場合がある。</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- 問題4 -->
+<div class="problem">
+  <div class="tag">問題 4</div>
+  <h2>ディレクトリ2のバイナリがそれぞれ何の言語で書かれているか特定せよ</h2>
+  <p class="desc">ディレクトリ2に含まれる各バイナリファイルが何のプログラミング言語で書かれているかを特定してください。</p>
+
+  <div class="hints">
+    <details><summary>ヒント1</summary>
+      <div class="hcont"><p>各言語はコンパイル時に特有の文字列を残します：</p>
+        <p><span class="badge">Rust</span> → <code>panicked at</code>、<code>/rustc/</code>、<code>RUST_BACKTRACE</code></p>
+        <p><span class="badge">Go</span> → <code>GOROOT</code>、<code>go1.</code>、<code>runtime.gopanic</code></p>
+        <p><span class="badge">Swift</span> → <code>swift</code> が含まれる文字列</p>
+        <p><span class="badge">C</span> → 上記どれも出ない</p>
+      </div>
+    </details>
+    <details><summary>ヒント2</summary>
+      <div class="hcont"><pre>strings candidate_a | grep -Ei "rust|cargo|GOROOT|go1\.|swift|panicked"</pre><p>ヒットした文字列でどの言語か判断しましょう。</p></div>
+    </details>
+    <details><summary>ヒント3</summary>
+      <div class="hcont"><pre>for f in candidate_a candidate_b candidate_c candidate_d candidate_e; do
+  echo "=== $f ==="
+  strings "$f" | grep -Ei "rust|GOROOT|go1\.|swift|panicked" | head -3
+done</pre></div>
+    </details>
+  </div>
+
+  <div class="row"><span class="lbl">candidate_a：</span><input type="text" id="q5c" placeholder="例: C"><button class="btn" onclick="chk('q5c',['c','c言語'],'f5c','ans5')">確認</button><span class="fb" id="f5c"></span></div>
+  <div class="row"><span class="lbl">candidate_b：</span><input type="text" id="q5d" placeholder="例: Go"><button class="btn" onclick="chk('q5d',['go','golang'],'f5d','ans5')">確認</button><span class="fb" id="f5d"></span></div>
+  <div class="row"><span class="lbl">candidate_c：</span><input type="text" id="q5e" placeholder="例: Rust"><button class="btn" onclick="chk('q5e',['rust'],'f5e','ans5')">確認</button><span class="fb" id="f5e"></span></div>
+  <div class="row"><span class="lbl">candidate_d：</span><input type="text" id="q5f" placeholder="例: C"><button class="btn" onclick="chk('q5f',['java'],'f5f','ans5')">確認</button><span class="fb" id="f5f"></span></div>
+  <div class="row"><span class="lbl">candidate_e：</span><input type="text" id="q5g" placeholder="例: Swift"><button class="btn" onclick="chk('q5g',['swift'],'f5g','ans5')">確認</button><span class="fb" id="f5g"></span></div>
+
+  <div class="ans-wrap" id="ans5">
+    <hr>
+    <details class="ans"><summary>答えを見る</summary>
+      <div class="acont">
+        <table>
+          <tr><th>ファイル</th><th>言語</th><th>根拠</th></tr>
+          <tr><td><code>candidate_a</code></td><td><strong>C</strong></td><td>特有の文字列なし（動的リンク）</td></tr>
+          <tr><td><code>candidate_b</code></td><td><strong>Go</strong></td><td><code>GOROOT</code>、<code>go1.</code>、<code>runtime.gopanic</code></td></tr>
+          <tr><td><code>candidate_c</code></td><td><strong>Rust</strong></td><td><code>panicked at</code>、<code>RUST_BACKTRACE</code>、<code>/rustc/</code></td></tr>
+          <tr><td><code>candidate_d</code></td><td><strong>Java</strong></td><td>java/lang/Object、candidate_d.java</td></tr>
+          <tr><td><code>candidate_e</code></td><td><strong>Swift</strong></td><td><code>swift</code> を含む文字列が見える</td></tr>
+        </table>
+        <p style="color:var(--muted)">Rust/Go は静的リンク（ランタイムを実行ファイルに埋め込む）のため strings の出力が多い。C/Swift は動的リンクのため少ない。</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('details.ans summary').forEach(function(summary) {
+    summary.addEventListener('click', function(e) {
+      if (!this.closest('details').open) {
+        if (!confirm('本当に答えを見ますか？')) {
+          e.preventDefault();
+        }
+      }
+    });
+  });
+});
+
+function showAns(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'block';
+}
+function chk(id, answers, fbId, ansId) {
+  const v = document.getElementById(id).value.trim().toLowerCase();
+  const ok = answers.map(a => a.toLowerCase()).includes(v);
+  const fb = document.getElementById(fbId);
+  fb.textContent = ok ? '✓ 正解！' : '✗ もう一度';
+  fb.className = 'fb ' + (ok ? 'ok' : 'ng');
+  showAns(ansId);
+}
+</script>
+</body>
+</html>

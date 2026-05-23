@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第1章 ヒント &amp; 解答</title>
+<style>
+:root {
+  --bg:#0d1117; --card:#161b22; --card2:#1c2128; --border:#30363d;
+  --text:#c9d1d9; --muted:#8b949e; --code:#bc8cff;
+  --green:#3fb950; --blue:#58a6ff; --yellow:#e3b341; --red:#f85149;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;padding:2rem 1rem;max-width:780px;margin:0 auto;line-height:1.6}
+h1{font-size:1.5rem;color:var(--green);margin-bottom:.3rem}
+.subtitle{color:var(--muted);font-size:.85rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.problem{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem;margin-bottom:1.4rem}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:.5rem}
+h2{font-size:1rem;margin-bottom:.7rem;line-height:1.4}
+.desc{color:var(--muted);font-size:.88rem;margin-bottom:1rem}
+code{background:#2d333b;padding:.1em .35em;border-radius:4px;font-family:'Fira Code',monospace;font-size:.83em;color:var(--code)}
+.hints{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+details{border:1px solid var(--border);border-radius:7px;overflow:hidden}
+summary{padding:.55rem 1rem;cursor:pointer;font-size:.85rem;color:var(--yellow);user-select:none;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▶  ';font-size:.7rem}
+details[open] summary::before{content:'▼  '}
+summary:hover{background:rgba(227,179,65,.06)}
+details[open] summary{border-bottom:1px solid var(--border)}
+.hcont{padding:.8rem 1rem;font-size:.87rem;background:var(--card2)}
+.hcont p+p{margin-top:.4rem}
+details.ans summary{color:var(--green)}
+details.ans summary::before{content:'🔓  ';font-size:.85rem}
+details.ans[open] summary::before{content:'🔒  '}
+.acont{padding:.9rem 1rem;background:rgba(63,185,80,.06);font-size:.87rem}
+.acont ul{list-style:none;display:flex;flex-direction:column;gap:.3rem}
+.acont li::before{content:'→  ';color:var(--green)}
+.row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem}
+.lbl{font-size:.83rem;color:var(--muted);min-width:140px}
+input[type=text]{background:#0d1117;border:1px solid var(--border);border-radius:6px;padding:.38rem .75rem;color:var(--text);font-family:'Fira Code',monospace;font-size:.85rem;width:180px}
+input[type=text]:focus{outline:none;border-color:var(--blue)}
+.btn{background:#1f6feb;color:#fff;border:none;border-radius:6px;padding:.38rem .9rem;cursor:pointer;font-size:.82rem;white-space:nowrap}
+.btn:hover{background:#388bfd}
+.btn.same{background:#1f6feb}.btn.diff{background:#6e40c9}
+.fb{font-size:.82rem;font-weight:600;min-width:90px}
+.fb.ok{color:var(--green)}.fb.ng{color:var(--red)}
+.ans-wrap{display:none;margin-top:1rem}
+hr{border:none;border-top:1px solid var(--border);margin:.8rem 0}
+</style>
+</head>
+<body>
+
+<h1>第1章 — 拡張子は信用できない</h1>
+<p class="subtitle">回答を入力して確認ボタンを押すと、答えを見ることができます。</p>
+
+<!-- 問題1 -->
+<div class="problem">
+  <div class="tag">問題 1</div>
+  <h2>cat.png / mystery.zip / kindai.heic は実際に何のファイル？</h2>
+  <p class="desc">ディレクトリ1にある3つのファイルについて、実際のファイル形式をそれぞれ答えてください。</p>
+
+  <div class="hints">
+    <details><summary>ヒント1</summary>
+      <div class="hcont"><p><code>file</code> コマンドはファイルの先頭バイト（マジックバイト）を読んでファイル形式を判定します。拡張子は一切見ません。</p></div>
+    </details>
+    <details><summary>ヒント2</summary>
+      <div class="hcont"><p>ディレクトリ1で次を実行してみましょう：<br><code>file cat.png mystery.zip kindai.heic</code></p></div>
+    </details>
+    <details><summary>ヒント3</summary>
+      <div class="hcont"><p>出力に <code>JPEG image data</code> / <code>PNG image data</code> / <code>PDF document</code> / <code>GIF image data</code> のいずれかが表示されます。</p></div>
+    </details>
+  </div>
+
+  <div class="row"><span class="lbl">cat.png の正体：</span><input type="text" id="q1a" placeholder="例: PNG"><button class="btn" onclick="chk('q1a',['jpeg','jpg'],'f1a','ans1')">確認</button><span class="fb" id="f1a"></span></div>
+  <div class="row"><span class="lbl">mystery.zip の正体：</span><input type="text" id="q1c" placeholder="例: ZIP"><button class="btn" onclick="chk('q1c',['pdf'],'f1c','ans1')">確認</button><span class="fb" id="f1c"></span></div>
+  <div class="row"><span class="lbl">kindai.heic の正体：</span><input type="text" id="q1d" placeholder="例: GIF"><button class="btn" onclick="chk('q1d',['gif'],'f1d','ans1')">確認</button><span class="fb" id="f1d"></span></div>
+
+  <div class="ans-wrap" id="ans1">
+    <hr>
+    <details class="ans"><summary>答えを見る</summary>
+      <div class="acont">
+        <ul>
+          <li><code>cat.png</code> → <strong>JPEG</strong>（先頭バイト: <code>FF D8 FF</code>）</li>
+          <li><code>mystery.zip</code> → <strong>PDF</strong>（先頭バイト: <code>25 50 44 46</code> = <code>%PDF-</code>）</li>
+          <li><code>kindai.heic</code> → <strong>GIF</strong>（先頭バイト: <code>47 49 46 38</code> = <code>GIF8</code>）</li>
+        </ul>
+        <p style="margin-top:.7rem;color:var(--muted)">拡張子はOSへの「ヒント」に過ぎず、中身とは無関係。悪意あるファイルはよくこれを偽造します。</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<!-- 問題2 -->
+<div class="problem">
+  <div class="tag">問題 2</div>
+  <h2>sample1 と sample2、sample1 と sample3 — 同じファイル？異なるファイル？</h2>
+  <p class="desc">それぞれのペアについて「同じ」か「異なる」かを選び、理由も考えてみてください。</p>
+
+  <div class="hints">
+    <details><summary>ヒント1</summary>
+      <div class="hcont"><p>ファイルの同一性はハッシュ値で比較できます。<code>shasum</code> コマンドを使いましょう。</p></div>
+    </details>
+    <details><summary>ヒント2</summary>
+      <div class="hcont"><p><code>shasum -a 256 sample1 sample2 sample3</code> を実行して3つのハッシュ値を比べてみましょう。</p></div>
+    </details>
+    <details><summary>ヒント3</summary>
+      <div class="hcont"><p>ハッシュが完全一致 → 同一ファイル。1バイトでも違えばハッシュは全く異なります（雪崩効果）。<code>cmp sample1 sample3</code> でも差が確認できます。</p></div>
+    </details>
+  </div>
+
+  <div class="row">
+    <span class="lbl">sample1 と sample2：</span>
+    <button class="btn same" onclick="choose('same','same','f2a','ans2')">同じ</button>
+    <button class="btn diff" onclick="choose('diff','same','f2a','ans2')">異なる</button>
+    <span class="fb" id="f2a"></span>
+  </div>
+  <div class="row">
+    <span class="lbl">sample1 と sample3：</span>
+    <button class="btn same" onclick="choose('same','diff','f2b','ans2')">同じ</button>
+    <button class="btn diff" onclick="choose('diff','diff','f2b','ans2')">異なる</button>
+    <span class="fb" id="f2b"></span>
+  </div>
+
+  <div class="ans-wrap" id="ans2">
+    <hr>
+    <details class="ans"><summary>答えを見る</summary>
+      <div class="acont">
+        <p><strong>sample1 と sample2：同じファイル</strong><br>
+        <code>shasum -a 256 sample1 sample2</code> のハッシュ値が完全一致する。</p>
+        <br>
+        <p><strong>sample1 と sample3：異なるファイル</strong><br>
+        <code>shasum -a 256 sample1 sample3</code> のハッシュ値が全く異なる。内容は1バイトだけ違うが、SHA-256の雪崩効果で全く別の値になる。</p>
+        <p style="margin-top:.6rem;color:var(--muted)">「ファイルサイズが同じ＝同じファイル」は誤り。マルウェア解析・フォレンジクスでは SHA-256 比較がデファクトスタンダード。</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('details.ans summary').forEach(function(summary) {
+    summary.addEventListener('click', function(e) {
+      if (!this.closest('details').open) {
+        if (!confirm('本当に答えを見ますか？')) {
+          e.preventDefault();
+        }
+      }
+    });
+  });
+});
+
+function showAns(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'block';
+}
+function chk(id, answers, fbId, ansId) {
+  const v = document.getElementById(id).value.trim().toLowerCase();
+  const ok = answers.map(a => a.toLowerCase()).includes(v);
+  const fb = document.getElementById(fbId);
+  fb.textContent = ok ? '✓ 正解！' : '✗ もう一度';
+  fb.className = 'fb ' + (ok ? 'ok' : 'ng');
+  showAns(ansId);
+}
+function choose(sel, correct, fbId, ansId) {
+  const ok = sel === correct;
+  const fb = document.getElementById(fbId);
+  fb.textContent = ok ? '✓ 正解！' : '✗ もう一度';
+  fb.className = 'fb ' + (ok ? 'ok' : 'ng');
+  showAns(ansId);
+}
+</script>
+</body>
+</html>

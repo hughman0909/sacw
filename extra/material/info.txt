@@ -1,0 +1,178 @@
+Classfile /Users/hughman090/Downloads/s/instructor_package/workshop_dist/workshop/extra/material/Main.class
+  Last modified 2026/05/23; size 1059 bytes
+  SHA-256 checksum 8e0d8bed6eb501bfc703bd1836cc02ab05d92a2684d55a4590df7fbcacae8218
+  Compiled from "Main.java"
+public class Main
+  minor version: 0
+  major version: 68
+  flags: (0x0021) ACC_PUBLIC, ACC_SUPER
+  this_class: #45                         // Main
+  super_class: #2                         // java/lang/Object
+  interfaces: 0, fields: 0, methods: 3, attributes: 1
+Constant pool:
+   #1 = Methodref          #2.#3          // java/lang/Object."<init>":()V
+   #2 = Class              #4             // java/lang/Object
+   #3 = NameAndType        #5:#6          // "<init>":()V
+   #4 = Utf8               java/lang/Object
+   #5 = Utf8               <init>
+   #6 = Utf8               ()V
+   #7 = String             #8             //
+   #8 = Utf8
+   #9 = String             #10            // b
+  #10 = Utf8               b
+  #11 = Class              #12            // java/util/Scanner
+  #12 = Utf8               java/util/Scanner
+  #13 = Fieldref           #14.#15        // java/lang/System.in:Ljava/io/InputStream;
+  #14 = Class              #16            // java/lang/System
+  #15 = NameAndType        #17:#18        // in:Ljava/io/InputStream;
+  #16 = Utf8               java/lang/System
+  #17 = Utf8               in
+  #18 = Utf8               Ljava/io/InputStream;
+  #19 = Methodref          #11.#20        // java/util/Scanner."<init>":(Ljava/io/InputStream;)V
+  #20 = NameAndType        #5:#21         // "<init>":(Ljava/io/InputStream;)V
+  #21 = Utf8               (Ljava/io/InputStream;)V
+  #22 = Fieldref           #14.#23        // java/lang/System.out:Ljava/io/PrintStream;
+  #23 = NameAndType        #24:#25        // out:Ljava/io/PrintStream;
+  #24 = Utf8               out
+  #25 = Utf8               Ljava/io/PrintStream;
+  #26 = String             #27            // Enter your ID:
+  #27 = Utf8               Enter your ID:
+  #28 = Methodref          #29.#30        // java/io/PrintStream.print:(Ljava/lang/String;)V
+  #29 = Class              #31            // java/io/PrintStream
+  #30 = NameAndType        #32:#33        // print:(Ljava/lang/String;)V
+  #31 = Utf8               java/io/PrintStream
+  #32 = Utf8               print
+  #33 = Utf8               (Ljava/lang/String;)V
+  #34 = Methodref          #11.#35        // java/util/Scanner.nextLine:()Ljava/lang/String;
+  #35 = NameAndType        #36:#37        // nextLine:()Ljava/lang/String;
+  #36 = Utf8               nextLine
+  #37 = Utf8               ()Ljava/lang/String;
+  #38 = String             #39            // Enter your Password:
+  #39 = Utf8               Enter your Password:
+  #40 = Methodref          #11.#41        // java/util/Scanner.nextInt:()I
+  #41 = NameAndType        #42:#43        // nextInt:()I
+  #42 = Utf8               nextInt
+  #43 = Utf8               ()I
+  #44 = Methodref          #45.#46        // Main.is_okay:(Ljava/lang/String;I)Z
+  #45 = Class              #47            // Main
+  #46 = NameAndType        #48:#49        // is_okay:(Ljava/lang/String;I)Z
+  #47 = Utf8               Main
+  #48 = Utf8               is_okay
+  #49 = Utf8               (Ljava/lang/String;I)Z
+  #50 = String             #51            // you made it!!!
+  #51 = Utf8               you made it!!!
+  #52 = Methodref          #29.#53        // java/io/PrintStream.println:(Ljava/lang/String;)V
+  #53 = NameAndType        #54:#33        // println:(Ljava/lang/String;)V
+  #54 = Utf8               println
+  #55 = String             #56            // you failed to login
+  #56 = Utf8               you failed to login
+  #57 = String             #58            // admin
+  #58 = Utf8               admin
+  #59 = Methodref          #60.#61        // java/lang/String.equals:(Ljava/lang/Object;)Z
+  #60 = Class              #62            // java/lang/String
+  #61 = NameAndType        #63:#64        // equals:(Ljava/lang/Object;)Z
+  #62 = Utf8               java/lang/String
+  #63 = Utf8               equals
+  #64 = Utf8               (Ljava/lang/Object;)Z
+  #65 = Utf8               Code
+  #66 = Utf8               LineNumberTable
+  #67 = Utf8               main
+  #68 = Utf8               ([Ljava/lang/String;)V
+  #69 = Utf8               StackMapTable
+  #70 = Class              #71            // "[Ljava/lang/String;"
+  #71 = Utf8               [Ljava/lang/String;
+  #72 = Utf8               SourceFile
+  #73 = Utf8               Main.java
+{
+  public Main();
+    descriptor: ()V
+    flags: (0x0001) ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 6: 0
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=3, locals=6, args_size=1
+         0: ldc           #7                  // String
+         2: astore_1
+         3: ldc           #9                  // String b
+         5: astore_2
+         6: new           #11                 // class java/util/Scanner
+         9: dup
+        10: getstatic     #13                 // Field java/lang/System.in:Ljava/io/InputStream;
+        13: invokespecial #19                 // Method java/util/Scanner."<init>":(Ljava/io/InputStream;)V
+        16: astore_3
+        17: getstatic     #22                 // Field java/lang/System.out:Ljava/io/PrintStream;
+        20: ldc           #26                 // String Enter your ID:
+        22: invokevirtual #28                 // Method java/io/PrintStream.print:(Ljava/lang/String;)V
+        25: aload_3
+        26: invokevirtual #34                 // Method java/util/Scanner.nextLine:()Ljava/lang/String;
+        29: astore        4
+        31: getstatic     #22                 // Field java/lang/System.out:Ljava/io/PrintStream;
+        34: ldc           #38                 // String Enter your Password:
+        36: invokevirtual #28                 // Method java/io/PrintStream.print:(Ljava/lang/String;)V
+        39: aload_3
+        40: invokevirtual #40                 // Method java/util/Scanner.nextInt:()I
+        43: istore        5
+        45: aload         4
+        47: iload         5
+        49: invokestatic  #44                 // Method is_okay:(Ljava/lang/String;I)Z
+        52: ifeq          66
+        55: getstatic     #22                 // Field java/lang/System.out:Ljava/io/PrintStream;
+        58: ldc           #50                 // String you made it!!!
+        60: invokevirtual #52                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        63: goto          74
+        66: getstatic     #22                 // Field java/lang/System.out:Ljava/io/PrintStream;
+        69: ldc           #55                 // String you failed to login
+        71: invokevirtual #52                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        74: return
+      LineNumberTable:
+        line 8: 0
+        line 9: 3
+        line 10: 6
+        line 11: 17
+        line 12: 25
+        line 13: 31
+        line 14: 39
+        line 15: 45
+        line 16: 55
+        line 18: 66
+        line 20: 74
+      StackMapTable: number_of_entries = 2
+        frame_type = 255 /* full_frame */
+          offset_delta = 66
+          locals = [ class "[Ljava/lang/String;", class java/lang/String, class java/lang/String, class java/util/Scanner, class java/lang/String, int ]
+          stack = []
+        frame_type = 7 /* same */
+
+  public static boolean is_okay(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)Z
+    flags: (0x0009) ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: ldc           #57                 // String admin
+         3: invokevirtual #59                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+         6: ifeq          17
+         9: iload_1
+        10: bipush        123
+        12: if_icmpne     17
+        15: iconst_1
+        16: ireturn
+        17: iconst_0
+        18: ireturn
+      LineNumberTable:
+        line 31: 0
+        line 32: 15
+        line 34: 17
+      StackMapTable: number_of_entries = 1
+        frame_type = 17 /* same */
+}
+SourceFile: "Main.java"

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第5章 ヒント &amp; 解答</title>
+<style>
+:root {
+  --bg:#0d1117; --card:#161b22; --card2:#1c2128; --border:#30363d;
+  --text:#c9d1d9; --muted:#8b949e; --code:#bc8cff;
+  --green:#3fb950; --blue:#58a6ff; --yellow:#e3b341; --red:#f85149;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;padding:2rem 1rem;max-width:780px;margin:0 auto;line-height:1.6}
+h1{font-size:1.5rem;color:var(--green);margin-bottom:.3rem}
+.subtitle{color:var(--muted);font-size:.85rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.problem{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem;margin-bottom:1.4rem}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
+h2{font-size:1rem;margin-bottom:.7rem;line-height:1.4}
+.desc{color:var(--muted);font-size:.88rem;margin-bottom:1rem}
+code{background:#2d333b;padding:.1em .35em;border-radius:4px;font-family:'Fira Code',monospace;font-size:.83em;color:var(--code)}
+pre{background:#2d333b;border-radius:6px;padding:.7rem 1rem;font-family:'Fira Code',monospace;font-size:.8rem;color:var(--code);overflow-x:auto;margin:.5rem 0}
+.hints{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+details{border:1px solid var(--border);border-radius:7px;overflow:hidden}
+summary{padding:.55rem 1rem;cursor:pointer;font-size:.85rem;color:var(--yellow);user-select:none;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▶  ';font-size:.7rem}
+details[open] summary::before{content:'▼  '}
+summary:hover{background:rgba(227,179,65,.06)}
+details[open] summary{border-bottom:1px solid var(--border)}
+.hcont{padding:.8rem 1rem;font-size:.87rem;background:var(--card2)}
+.hcont p+p{margin-top:.4rem}
+details.ans summary{color:var(--green)}
+details.ans summary::before{content:'🔓  ';font-size:.85rem}
+details.ans[open] summary::before{content:'🔒  '}
+.acont{padding:.9rem 1rem;background:rgba(63,185,80,.06);font-size:.87rem}
+.acont p+p{margin-top:.6rem}
+.row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem}
+input[type=text]{background:#0d1117;border:1px solid var(--border);border-radius:6px;padding:.38rem .75rem;color:var(--text);font-family:'Fira Code',monospace;font-size:.85rem;width:300px}
+input[type=text]:focus{outline:none;border-color:var(--blue)}
+.btn{background:#1f6feb;color:#fff;border:none;border-radius:6px;padding:.38rem .9rem;cursor:pointer;font-size:.82rem}
+.btn:hover{background:#388bfd}
+.fb{font-size:.82rem;font-weight:600}
+.fb.ok{color:var(--green)}.fb.ng{color:var(--red)}
+.ans-wrap{display:none;margin-top:1rem}
+hr{border:none;border-top:1px solid var(--border);margin:.8rem 0}
+.step{background:var(--card2);border-radius:7px;padding:.8rem 1rem;margin:.6rem 0}
+.step-head{font-size:.78rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.file-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:.6rem 0}
+.file-card{background:var(--card2);border:1px solid var(--border);border-radius:7px;padding:.7rem}
+.file-card .fname{font-family:'Fira Code',monospace;color:var(--code);font-weight:700;margin-bottom:.3rem}
+.file-card .ftype{color:var(--yellow);font-size:.78rem}
+.file-card .fdesc{color:var(--muted);font-size:.76rem;margin-top:.2rem}
+.flag-box{background:#0d1117;border:2px solid var(--green);border-radius:8px;padding:.8rem 1.2rem;text-align:center;font-family:'Fira Code',monospace;font-size:1rem;color:var(--green);font-weight:700;margin:.8rem 0}
+</style>
+</head>
+<body>
+
+<h1>第5章 — 総合問題</h1>
+<p class="subtitle">回答を入力して確認ボタンを押すと、答えを見ることができます。</p>
+
+<div class="problem">
+  <div class="tag">総合問題 — Final Challenge</div>
+  <h2>items.zip を調査し、3つのファイルに隠されたフラグの断片を集めて組み合わせよ</h2>
+  <p class="desc">
+    ディレクトリ5の <code>items.zip</code> には <code>app</code>・<code>image</code>・<code>invoice.pdf</code> の3ファイルが入っています。それぞれ異なる仕掛けが施されており、各ファイルにフラグの断片が隠されています。これまでの章で学んだすべての技術を使って、フラグを完成させてください。
+  </p>
+
+  <div class="row">
+    <input type="text" id="qf" placeholder="完成したフラグを入力">
+    <button class="btn" onclick="chkFinal()">確認</button>
+    <span class="fb" id="ff"></span>
+  </div>
+
+  <div class="ans-wrap" id="ansf">
+    <hr>
+    <details class="ans"><summary>答えを見る</summary>
+      <div class="acont">
+        <div class="flag-box">kindai{surface_analysis_master}</div>
+        <p>3つのファイルから断片を取り出して繋げるとフラグが完成します。</p>
+
+        <div class="step">
+          <div class="step-head">Step 0 — 展開して形式を確認</div>
+          <pre>unzip items.zip -d items && cd items
+file *
+# app      → data
+# image    → data
+# invoice.pdf → JPEG image data（拡張子と中身が違う！）</pre>
+          <div class="file-cards">
+            <div class="file-card"><div class="fname">app</div><div class="ftype">XORエンコード＋UPXパック</div><div class="fdesc">断片①：kindai{surface_</div></div>
+            <div class="file-card"><div class="fname">image</div><div class="ftype">先頭4バイト破損 PNG</div><div class="fdesc">断片②：analysis_</div></div>
+            <div class="file-card"><div class="fname">invoice.pdf</div><div class="ftype">実は JPEG</div><div class="fdesc">断片③：master}</div></div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-head">Step 1 — app からフラグ断片を取る（第4章の手法）</div>
+          <pre>strings app   # XORで難読化されており文字列は読めない
+upx -d app    # UPXアンパック
+./app         # 実行すると断片が表示される
+# → kindai{surface_</pre>
+        </div>
+
+        <div class="step">
+          <div class="step-head">Step 2 — image からフラグ断片を取る（第3章の手法）</div>
+          <pre>xxd image | head -1
+# 00 00 00 00 0D 0A 1A 0A  ← PNG の先頭4バイトが破損している
+
+( printf '\x89\x50\x4E\x47'; tail -c +5 image ) > image_fixed.png
+file image_fixed.png   # → PNG image data
+open image_fixed.png   # 画像内に断片が描かれている
+# → analysis_</pre>
+        </div>
+
+        <div class="step">
+          <div class="step-head">Step 3 — invoice.pdf からフラグ断片を取る（第1章の手法）</div>
+          <pre>file invoice.pdf   # → JPEG image data（PDF ではない！）
+
+cp invoice.pdf fake.jpg
+open fake.jpg   # 画像を開くと断片が見える
+# → master}</pre>
+        </div>
+
+        <p><strong>断片を繋げる：</strong> <code>kindai{surface_</code> + <code>analysis_</code> + <code>master}</code></p>
+        <p style="color:var(--muted)">UPXアンパック・シグネチャ修復・拡張子偽装の看破という全技術のフルコース。</p>
+      </div>
+    </details>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('details.ans summary').forEach(function(summary) {
+    summary.addEventListener('click', function(e) {
+      if (!this.closest('details').open) {
+        if (!confirm('本当に答えを見ますか？')) {
+          e.preventDefault();
+        }
+      }
+    });
+  });
+});
+
+function showAns(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'block';
+}
+function chkFinal() {
+  const v = document.getElementById('qf').value.trim();
+  const correct = 'kindai{surface_analysis_master}';
+  const ok = v === correct;
+  const fb = document.getElementById('ff');
+  if (ok) {
+    fb.textContent = '✓ 正解！全問クリア！';
+  } else if (v.toLowerCase().includes('kindai') || v.toLowerCase().includes('surface')) {
+    fb.textContent = '惜しい！完全一致で入力してください';
+    fb.className = 'fb ng';
+    showAns('ansf');
+    return;
+  } else {
+    fb.textContent = '✗ もう一度';
+  }
+  fb.className = 'fb ' + (ok ? 'ok' : 'ng');
+  showAns('ansf');
+}
+</script>
+</body>
+</html>
